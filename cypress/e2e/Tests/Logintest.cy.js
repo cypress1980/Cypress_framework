@@ -26,7 +26,7 @@ beforeEach(() => {
     })
 
     it('valid credentials', () => {
-        loginpage.enterUsername(testdata.username);
+        loginpage.enteremailAddress(testdata.username);
         loginpage.enterPassword(testdata.password);
         loginpage.clickLogin();
         cy.url().should('include', '/web/index.php/dashboard/index');
