@@ -1,38 +1,33 @@
 // <reference types="cypress" />
 
-//import LoginPage from "../pages/loginpage.cy.js";
-import LoginPage from "../pages/loginpage.cy.js";
+import LoginPage from "../Page/loginPage.cy.js";
 
 describe('Login Test', () => {
     let testdata;
 
-    const loginpage = new LoginPage();
+     const loginpage = new LoginPage();
 
 beforeEach(() => {
-    cy.fixture('credential_file').then( (testdata_original)=> {
+    cy.fixture('credential').then( (testdata_original)=> {
         testdata = testdata_original;
       });
-        cy.visit('/');
-        
-       
+       // cy.visit('/');  
+       cy.visit ('https://ecommerce-playground.lambdatest.io/index.php?route=account/login');
     });
 
-
     it('Login Test', () => {
-        //cy.log(testdata.username); this is how you can log the data:::
-
         loginpage.loginbuttonexist().contains('Login').should('be.visible');
    
     })
 
     it('valid credentials', () => {
-        loginpage.enteremailAddress(testdata.username);
+        loginpage.enteremailAddress(testdata.enteremailAddress);
         loginpage.enterPassword(testdata.password);
         loginpage.clickLogin();
-        cy.url().should('include', '/web/index.php/dashboard/index');
+        cy.url().should('include', 'https://ecommerce-playground.lambdatest.io/index.php?route=account/account');
         loginpage.usr_logged_in();
         cy.wait(1000);
-        loginpage.user_logout();
+        //loginpage.user_logout();
 
     })
 
