@@ -1,16 +1,13 @@
 //login to the applocation
 class LoginPage {
 
-  
-
-  emailAddress ='[id="input-email"]'
- /*consrtuctor() {
-    this.loginButton = '[type="submit"]';
-    this.emailAddress = '[id="input-email"]';
-    this.password = '[id="input-password"]';
+ consrtuctor() {
+    this.loginButton = 'button[type="submit"]';
+    this.emailAddress = 'input[name="email"]';
+    this.password = 'input[name="password"]';
    // this.errorMessage = ".";
     this.logout = ".list-group-item";
- }*/
+ }
 
  openUrl() {
     cy.visit(this.url);
@@ -28,6 +25,12 @@ class LoginPage {
   enterPassword(psw) {
      cy.get(this.password).type(psw);
     //cy.get(this.password);
+    cy.get(this.emailAddress).type(email);
+
+  }
+
+  enterPassword(psw) {
+    cy.get(this.password).type(psw);
   }
 
   clickLogin() {
