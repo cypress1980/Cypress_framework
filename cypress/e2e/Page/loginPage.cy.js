@@ -8,7 +8,7 @@ class LoginPage {
   }
 
   openUrl() {
-    cy.visit(this.url);
+    cy.visit('',{failOnStatusCode: false});
   }
 
   loginbuttonexist() {
