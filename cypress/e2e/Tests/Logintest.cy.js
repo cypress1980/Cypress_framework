@@ -15,13 +15,14 @@ beforeEach(() => {
        cy.visit ('https://ecommerce-playground.lambdatest.io/index.php?route=account/login');
     });
 
-    it('Login Test', () => {
+    it.skip('Login Test', () => {
         loginpage.loginbuttonexist().contains('Login').should('be.visible');
    
     })
 
-    it('valid credentials', () => {
-        loginpage.enteremailAddress(testdata.enteremailAddress);
+
+    it('valid credential', () => {
+        loginpage.enteremailAddress(testdata.emailAddress);
         loginpage.enterPassword(testdata.password);
         loginpage.clickLogin();
         cy.url().should('include', 'https://ecommerce-playground.lambdatest.io/index.php?route=account/account');

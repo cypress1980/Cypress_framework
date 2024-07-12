@@ -1,7 +1,6 @@
 //login to the applocation
 class LoginPage {
  consrtuctor() {
-    this.url = "/" ; //base url is saved in cpress.config.js
     this.loginButton = 'button[type="submit"]';
     this.emailAddress = 'input[name="email"]';
     this.password = 'input[name="password"]';
@@ -18,14 +17,12 @@ class LoginPage {
     return cy.get(this.loginButton);
   }
   enteremailAddress(email) {
-    //cy.get(this.emailAddress).type(email);
-    cy.get(this.emailAddress);
+    cy.get(this.emailAddress).type(email);
 
   }
 
   enterPassword(psw) {
-    //cy.get(this.password).type(psw);
-    cy.get(this.password);
+    cy.get(this.password).type(psw);
   }
 
   clickLogin() {
