@@ -1,13 +1,16 @@
 //login to the applocation
 class LoginPage {
- consrtuctor() {
-    this.url = "/" ; //base url is saved in cpress.config.js
-    this.loginButton = 'button[type="submit"]';
-    this.emailAddress = 'input[name="email"]';
-    this.password = 'input[name="password"]';
+
+  
+
+  emailAddress ='[id="input-email"]'
+ /*consrtuctor() {
+    this.loginButton = '[type="submit"]';
+    this.emailAddress = '[id="input-email"]';
+    this.password = '[id="input-password"]';
    // this.errorMessage = ".";
     this.logout = ".list-group-item";
- }
+ }*/
 
  openUrl() {
     cy.visit(this.url);
@@ -15,21 +18,20 @@ class LoginPage {
 
   loginbuttonexist() {
     //cy.get(this.LoginButton).contains('Login').should('be.visible');
-    return cy.get(this.loginButton);
+     //cy.get(this.loginButton);
   }
   enteremailAddress(email) {
     //cy.get(this.emailAddress).type(email);
-    cy.get(this.emailAddress);
-
+    cy.get(emailAddress).type(email);
   }
 
   enterPassword(psw) {
-    //cy.get(this.password).type(psw);
-    cy.get(this.password);
+     cy.get(this.password).type(psw);
+    //cy.get(this.password);
   }
 
   clickLogin() {
-    cy.get(this.loginButton).click();
+    cy.get(this.loginButton).eq(0).click();
   }
 
   usr_logged_in() {

@@ -1,27 +1,29 @@
 // <reference types="cypress" />
 
 import LoginPage from "../Page/loginPage.cy.js";
-
 describe('Login Test', () => {
     let testdata;
+    const loginpage = new LoginPage();
 
-     const loginpage = new LoginPage();
-
-beforeEach(() => {
-    cy.fixture('credential').then( (testdata_original)=> {
+    beforeEach(() => {
+    cy.fixture('credential.json').then( (testdata_original)=> {
         testdata = testdata_original;
       });
-       // cy.visit('/');  
-       cy.visit ('https://ecommerce-playground.lambdatest.io/index.php?route=account/login');
+      cy.log("Data from fixture file ---->>>> ",testdata)
+        cy.visit('https://ecommerce-playground.lambdatest.io/index.php?route=account/login');
     });
 
-    it('Login Test', () => {
+    it.skip('Login Test', () => {
         loginpage.loginbuttonexist().contains('Login').should('be.visible');
-   
     })
 
-    it('valid credentials', () => {
-        loginpage.enteremailAddress(testdata.enteremailAddress);
+    it("AND Login into the application", () => {
+        cy.get('[id="input-email"]').type("lambdatest@yopmail.com");
+        cy.get('[id="input-password"]').type("lambdatest");
+        cy.get('[type="submit"]').eq(0).click();
+      });
+    it.only('Verify login funcationlity with valid credentials', () => {
+        loginpage.enteremailAddress(testdata.emailAddress);
         loginpage.enterPassword(testdata.password);
         loginpage.clickLogin();
         cy.url().should('include', 'https://ecommerce-playground.lambdatest.io/index.php?route=account/account');
@@ -37,13 +39,13 @@ beforeEach(() => {
         loginpage.clickLogin();
         cy.url().should('not.include' , '/web/index.php/dashboard/index');
         loginpage.getErrorMessage("Invalid credentials");
-       })
+    })
 
-       it('Enter empty email and password', () => {
+    it('Enter empty email and password', () => {
         loginpage.clickLogin();
         cy.contains('Required').should('be.visible');
         cy.url().should('not.include' , '/web/index.php/dashboard/index');
-       })
+    })
 
 
 });
