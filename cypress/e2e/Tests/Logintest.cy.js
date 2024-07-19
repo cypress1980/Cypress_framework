@@ -1,7 +1,10 @@
 // <reference types="cypress" />
 
 import LoginPage from "../Page/loginPage.cy.js";
+import accountInfo from "../../fixtures/accountInformation.json"
+
 describe('Login Test', () => {
+    const emilAddress =getEmailAddress('yahoo.com')
     let testdata;
     const loginpage = new LoginPage();
     beforeEach(() => {
@@ -29,6 +32,27 @@ describe('Login Test', () => {
     it('Enter empty email and password', () => {
         loginpage.clickLogin();
         loginpage.getErrorMessage();
-        //cy.url().should('not.include' , '/web/index.php/dashboard/index');
+    })
+    it.only('Fill Account Information', () => {
+
+       //getEmailAddress('gmail')
+
+        //cy.log (" Hi This is Random generated email", getEmailAddress('yopmail.com'))
+        loginpage.enteremailAddress(testdata.emailAddress);
+        loginpage.enterPassword(testdata.password);
+        loginpage.clickLogin();
+        cy.get('.list-group-item').eq(1).click()
+       
+        for (let i=0;i<accountInfo.accountInformation.length;i++){
+            loginpage.fillAccountInformation(accountInfo.accountInformation[i])
+
+        }
     })
 });
+
+function getEmailAddress(domain)
+{
+    const randomEmail =Math.random().toString(36).substring(7)    // 12gsgjs
+    return randomEmail +'@' + domain ///  12gsgjs@yahoo.com
+}
+
